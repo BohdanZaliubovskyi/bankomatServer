@@ -48,7 +48,7 @@ namespace BankomatServer.Models.Gateways
             return confirmKeys;
         }
 
-        public ConfirmKeys GetItemById(int id)
+        public ConfirmKeys GetItemById(long id)
         {
             ConfirmKeys cc = null;
 
@@ -79,7 +79,7 @@ namespace BankomatServer.Models.Gateways
         /// </summary>
         /// <param name="clientId">идентификатор клиента</param>
         /// <returns></returns>
-        public ConfirmKeys GetItemByClientId(int clientId)
+        public ConfirmKeys GetItemByClientId(long clientId)
         {
             ConfirmKeys cc = null;
 
@@ -94,5 +94,53 @@ namespace BankomatServer.Models.Gateways
 
             return cc;
         }
+
+        /// <summary>
+        /// удаление старых ключей для идентификации, если таковые имеются
+        /// </summary>
+        /// <param name="clientId"></param>
+        public void DelItemsByClientId(long clientId)
+        {
+            List<ConfirmKeys> ckl;
+            using (var db = new mainEntities())
+            {
+                var transactions = from c in db.ConfirmKeys
+                                   where c.ClientId == clientId
+                                   select c;
+
+                ckl = transactions.ToList();
+
+                if (ckl != null && ckl.Count > 0)
+                {
+                    foreach (ConfirmKeys ck in ckl)
+                    {
+                        db.ConfirmKeys.Attach(ck);
+                        db.ConfirmKeys.Remove(ck);
+                    }
+                    db.SaveChanges();
+                }               
+            }
+        }
+        /// <summary>
+        /// получить ключ доступа для клиента
+        /// </summary>
+        /// <param name="clientId">идентификатор клиента</param>
+        /// <returns></returns>
+        public ConfirmKeys GetItemByClientIdAndConfirmKey(long clientId, long key)
+        {
+            ConfirmKeys cc = null;
+
+            using (var db = new mainEntities())
+            {
+                var transactions = from c in db.ConfirmKeys
+                                   where c.ClientId == clientId && c.PhoneKey == key
+                                   select c;
+                if (transactions != null)
+                    cc = transactions.SingleOrDefault();
+            }
+
+            return cc;
+        }
+
     }
 }

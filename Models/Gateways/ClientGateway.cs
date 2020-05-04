@@ -30,9 +30,9 @@ namespace BankomatServer.Models.Gateways
 
             using (var db = new mainEntities())
             {
-                db.Entry(item).Collection(c => c.Cards).Load();
-                db.Entry(item).Collection(c => c.ConfirmKeys).Load();
-                db.Entry(item).Collection(c => c.Phones).Load();
+                //db.Entry(item).Collection(c => c.Cards).Load();
+                //db.Entry(item).Collection(c => c.ConfirmKeys).Load();
+                //db.Entry(item).Collection(c => c.Phones).Load();
 
                 db.Clients.Attach(item);
                 db.Clients.Remove(item);
@@ -52,7 +52,7 @@ namespace BankomatServer.Models.Gateways
             return clients;
         }
 
-        public Clients GetItemById(int id)
+        public Clients GetItemById(long id)
         {
             Clients cl = null;
 

@@ -98,6 +98,7 @@
       <LastGenOutput>ATMModel.cs</LastGenOutput>
     </Content>
     <Content Include="BankomatService.asmx" />
+    <Content Include="Models\PhoneKeyManager.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -132,6 +133,12 @@
       <DependentUpon>ATMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CardStatusChecker.cs" />
+    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\DataClasses\BaseCard.cs" />
+    <Compile Include="Models\DataClasses\BaseCardsLimits.cs" />
+    <Compile Include="Models\DataClasses\BaseObjClass.cs" />
+    <Compile Include="Models\DataClasses\CardsLimits.cs" />
+    <Compile Include="Models\DataClasses\CardsStatuses.cs" />
     <Compile Include="Models\DBDateManager.cs" />
     <Compile Include="Models\Gateways\BaseSingleton.cs" />
     <Compile Include="Models\Gateways\CardGateway.cs" />
@@ -140,6 +147,8 @@
     <Compile Include="Models\Gateways\IBaseGateway.cs" />
     <Compile Include="Models\Gateways\PhoneGateway.cs" />
     <Compile Include="Models\Gateways\TransactionGateway.cs" />
+    <Compile Include="Models\PhoneKeyManager.cs" />
+    <Compile Include="Models\SerializedObjectWrapper.cs" />
     <Compile Include="Phones.cs">
       <DependentUpon>ATMModel.tt</DependentUpon>
     </Compile>

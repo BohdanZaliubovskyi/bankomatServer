@@ -9,29 +9,46 @@
 
 namespace BankomatServer
 {
+    using BankomatServer.Models.DataClasses;
     using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
-    public partial class Cards
+    /// <summary>
+    /// вид/статус карты
+    /// </summary>
+    [Serializable]
+    public enum CardsStatuses
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cards()
-        {
-            this.Transactions = new HashSet<Transactions>();
-        }
-    
-        public long Id { get; set; }
-        public string CardNumber { get; set; }
-        public long Pin { get; set; }
-        public long CardStatus { get; set; }
-        public bool IsBlocked { get; set; }
-        public System.DateTime DateOfEndUsing { get; set; }
-        public long ClientId { get; set; }
-    
+        [XmlEnum(Name = "BlackCard")]
+        BlackCard = 0,
+        [XmlEnum(Name = "BlueCard")]
+        BlueCard = 1,
+        [XmlEnum(Name = "GoldCard")]
+        GoldCard = 2,
+    }
+    [Serializable]
+    public partial class Cards : BaseCard
+    {
         public virtual Clients Clients { get; set; }
-        [XmlIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transactions> Transactions { get; set; }
+
+        /// <summary>
+        /// приведение к базовому объекту для передачи через xmlSerializer
+        /// </summary>
+        /// <returns>BaseCard object</returns>
+        public override BaseCard GetBaseObj()
+        {
+            BaseCard bc = new Cards();
+            bc.Balance = Balance;
+            bc.CardNumber = CardNumber;
+            bc.CardStatus = CardStatus;
+            bc.ClientId = ClientId;
+            bc.DateOfEndUsing = DateOfEndUsing;
+            bc.Id = Id;
+            bc.IsBlocked = IsBlocked;
+            bc.Pin = Pin;
+
+            return bc;
+        }
     }
 }

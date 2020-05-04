@@ -16,13 +16,9 @@ namespace BankomatServer.Models.Gateways
         /// </summary>
         Adding = 1,
         /// <summary>
-        /// снятие денег со счета, наличка
+        /// снятие денег со счета
         /// </summary>
-        SubtractionCash,
-        /// <summary>
-        /// снятие денег со счета, безнал
-        /// </summary>
-        SubtractionCashless,
+        Subtraction,
     }
     class TransactionGateway : BaseSingleton<TransactionGateway>, IBaseGateway<Transactions>
     {
@@ -63,7 +59,7 @@ namespace BankomatServer.Models.Gateways
             return transactions;
         }
 
-        public Transactions GetItemById(int id)
+        public Transactions GetItemById(long id)
         {
             Transactions tr = null;
 
@@ -96,7 +92,7 @@ namespace BankomatServer.Models.Gateways
         /// <param name="transactionDay">день транзакции</param>
         /// <param name="cardID">идентификатор </param>
         /// <returns></returns>
-        public List<Transactions> GetTransactionsByFormAndDayAndCardId(TransactionForm transactionForm, DateTime transactionDay, int cardID)
+        public List<Transactions> GetTransactionsByFormAndDayAndCardId(TransactionForm transactionForm, DateTime transactionDay, long cardID)
         {
             DateTime sDate = new DateTime(transactionDay.Year, transactionDay.Month, transactionDay.Day, 0, 0, 0);
             DateTime eDate = new DateTime(transactionDay.Year, transactionDay.Month, transactionDay.Day, 23, 59, 59);

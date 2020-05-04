@@ -5,7 +5,6 @@ using System.Web;
 
 namespace BankomatServer.Models.Gateways
 {
-    // Database.Connection.ConnectionString = "Data Source=" + System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/BankomatDB.db") + ";Version=3;";
     /// <summary>
     /// паттерн синглтон для гетвеев
     /// </summary>

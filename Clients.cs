@@ -11,29 +11,10 @@ namespace BankomatServer
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Serialization;
-
+    
     public partial class Clients
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clients()
-        {
-            this.Cards = new HashSet<Cards>();
-            this.ConfirmKeys = new HashSet<ConfirmKeys>();
-            this.Phones = new HashSet<Phones>();
-        }
-    
         public long Id { get; set; }
         public string Name { get; set; }
-
-        [XmlIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cards> Cards { get; set; }
-        [XmlIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConfirmKeys> ConfirmKeys { get; set; }
-        [XmlIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phones> Phones { get; set; }
     }
 }

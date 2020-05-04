@@ -48,7 +48,7 @@ namespace BankomatServer.Models.Gateways
             return phones;
         }
 
-        public Phones GetItemById(int id)
+        public Phones GetItemById(long id)
         {
             Phones ph = null;
 
@@ -57,7 +57,7 @@ namespace BankomatServer.Models.Gateways
                 var transactions = from p in db.Phones
                                    where p.Id == id
                                    select p;
-                if (transactions != null)
+                //if (transactions != null)
                     ph = transactions.SingleOrDefault();
             }
 
@@ -79,7 +79,7 @@ namespace BankomatServer.Models.Gateways
         /// <param name="phoneNumber">номер телефона</param>
         /// <param name="clientId">ид клиента</param>
         /// <returns>true=такая комбинация существует false=такой комбинации не существует</returns>
-        public bool GetItemByPhoneNumberAndClientId(string phoneNumber, int clientId)
+        public bool GetItemByPhoneNumberAndClientId(string phoneNumber, long clientId)
         {
             Phones ph = null;
 
@@ -88,8 +88,8 @@ namespace BankomatServer.Models.Gateways
                 var transactions = from p in db.Phones
                                    where p.Number == phoneNumber && p.ClientId == clientId
                                    select p;
-                if (transactions != null)
-                    ph = transactions.Single();
+                //if (transactions != null)
+                    ph = transactions.SingleOrDefault();
             }
             bool rez = ph==null? false :  true;
             return rez;

@@ -37,6 +37,6 @@ namespace BankomatServer.Models.Gateways
         /// </summary>
         /// <param name="id">идентификат</param>
         /// <returns></returns>
-        T GetItemById(int id);
+        T GetItemById(long id);
     }
 }
